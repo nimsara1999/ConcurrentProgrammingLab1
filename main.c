@@ -52,6 +52,35 @@ int Insert(int value, Node** head_pp) {
 }
 
 
+// Delete a node
+int Delete(int value, Node** head_pp) {
+    Node* curr_p = *head_pp;
+    Node* pred_p = NULL;
+
+    // Find the node to be deleted
+    while (curr_p != NULL && curr_p->data != value) {
+        pred_p = curr_p;
+        curr_p = curr_p->next;
+    }
+
+    // If the value is not found
+    if (curr_p == NULL) {
+        return 0;
+    }
+
+    // If the node to be deleted is the head node
+    if (pred_p == NULL) {
+        *head_pp = curr_p->next;
+    } else {
+        pred_p->next = curr_p->next; //Bypass the link
+    }
+
+    free(curr_p);  // Free the memory of the deleted node
+    return 1; 
+}
+
+
+
 
 int main() {
     // Allocate memory for nodes
@@ -69,9 +98,22 @@ int main() {
     node3->next = NULL;
     node2->next = node3;
 
+    //insert a value
+    int isInsert = Insert(14,&node1);
+    printf("Insert %d : %s \n", 14 ,isInsert ? "Yes" : "No");
+
     // Check membership
-    int result = Member(-6, node1);
-    printf("%s", result ? "Yes" : "No");
+    int isMember1 = Member(10, node1);
+    printf("%s \n", isMember1 ? "Yes" : "No");
+
+
+    //Delete a node
+    int isDelete = Delete(10,&node1);
+    printf("Delete %d : %s \n", 10 ,isDelete ? "Yes" : "No");
+
+    // Check membership
+    int isMember2 = Member(10, node1);
+    printf("%s \n", isMember2 ? "Yes" : "No");
 
     // Free allocated memory
     free(node3);
