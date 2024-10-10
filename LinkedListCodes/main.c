@@ -200,7 +200,7 @@ double RWLockOpsParallel(struct Node *head) {
 }
 
 // Generate a CSV file with performance results for different synchronization methods
-void GenerateResultsCSV(int num_samples) {
+void GenerateResultsCSV(int num_samples, int num_threads) {
     int iterations = num_samples;
     double serial_time, mutex_time, rwlock_time;
 
@@ -216,25 +216,25 @@ void GenerateResultsCSV(int num_samples) {
 
     InitList(n, &head);
 
-    for (int i = 1; i <= 8; i *= 2) {
-        for (int j = 0; j < iterations; j++) {
-            thread_count = i;
-            list_mutex = CopyList(head);
-            list_rwlock = CopyList(head);
 
-            if (thread_count == 1) {
-                list_serial = CopyList(head);
-                serial_time = SerialOps(list_serial);
-            } else {
-                serial_time = 0;
-            }
+    for (int j = 0; j < iterations; j++) {
+        thread_count = num_threads;
+        list_mutex = CopyList(head);
+        list_rwlock = CopyList(head);
 
-            mutex_time = MutexOpsParallel(list_mutex);
-            rwlock_time = RWLockOpsParallel(list_rwlock);
-
-            fprintf(file, "%d,%.10f,%.10f,%.10f\n", thread_count, serial_time, mutex_time, rwlock_time);
+        if (thread_count == 1) {
+            list_serial = CopyList(head);
+            serial_time = SerialOps(list_serial);
+        } else {
+            serial_time = 0;
         }
+
+        mutex_time = MutexOpsParallel(list_mutex);
+        rwlock_time = RWLockOpsParallel(list_rwlock);
+
+        fprintf(file, "%d,%.10f,%.10f,%.10f\n", thread_count, serial_time, mutex_time, rwlock_time);
     }
+
     FreeList(head);
     FreeList(list_serial);
     FreeList(list_mutex);
@@ -245,28 +245,29 @@ void GenerateResultsCSV(int num_samples) {
 }
 
 int main(int argc, char *argv[]) {
-    fprintf(stderr, "Usage: %s <thread count> <mMember> <mInsert> | -gen-csv <samples> <mMember> <mInsert>\n", argv[0]);
+    fprintf(stderr, "Usage: %s <thread count> <mMember> <mInsert> <mDelete> | -gen-csv <samples> <mMember> <mInsert> <mDelete>\n", argv[0]);
     if (argc < 4) {
         return EXIT_FAILURE;
     }
 
     if (strcmp(argv[1], "-gen-csv") == 0) {
-        if (argc != 5) {
-            fprintf(stderr, "Usage: %s -gen-csv <samples> <mMember> <mInsert>\n", argv[0]);
+        if (argc != 7) {
+            fprintf(stderr, "Usage: %s -gen-csv <samples> <threads> <mMember> <mInsert> <mDelete>\n", argv[0]);
             return EXIT_FAILURE;
         }
         int num_samples = atoi(argv[2]);
-        mMember = atof(argv[3]);
-        mInsert = atof(argv[4]);
-        mDelete = 1 - (mMember + mInsert);
+        int num_threads = atoi(argv[3]);
+        mMember = atof(argv[4]);
+        mInsert = atof(argv[5]);
+        mDelete = atof(argv[6]);
 
         srand(time(NULL));
-        GenerateResultsCSV(num_samples);
+        GenerateResultsCSV(num_samples, num_threads);
     } else {
         thread_count = atoi(argv[1]);
         mMember = atof(argv[2]);
         mInsert = atof(argv[3]);
-        mDelete = 1 - (mMember + mInsert);
+        mDelete = atof(argv[4]);
 
         srand(time(NULL));
 
