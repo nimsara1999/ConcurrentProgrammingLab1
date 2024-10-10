@@ -245,7 +245,10 @@ void GenerateResultsCSV(int num_samples, int num_threads) {
 }
 
 int main(int argc, char *argv[]) {
-    fprintf(stderr, "Usage: %s <thread count> <mMember> <mInsert> <mDelete> | -gen-csv <samples> <mMember> <mInsert> <mDelete>\n", argv[0]);
+    printf("\n");printf("\n");
+    fprintf(stderr, "Command1 (Get elapsed time) :  %s <thread count> <mMember> <mInsert> <mDelete>\n\n", argv[0]);
+    fprintf(stderr, "Command2 (Generate csv file) :  %s -gen-csv <samples> <thread count> <mMember> <mInsert> <mDelete>\n\n", argv[0]);
+
     if (argc < 4) {
         return EXIT_FAILURE;
     }
@@ -277,7 +280,7 @@ int main(int argc, char *argv[]) {
         struct Node *head = NULL;
         InitList(n, &head);
 
-        printf("\n");printf("\n");
+        printf("\n");
         printf("Test Configurations\n");
         printf("--------------------------------------------------------------------\n");
         printf("%-40s - %21d  \n", "Number of threads", thread_count);
