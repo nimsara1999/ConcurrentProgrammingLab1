@@ -21,7 +21,9 @@ gcc -o linked_list main.c linkedList.c -lpthread -lm
 ```
 
 ## Commands 
-
+```bash
 Command1 (Get elapsed time) :  ./executable <thread count> <mMember> <mInsert> <mDelete>
-
+```
+```bash
 Command2 (Generate csv file) :  ./executable -gen-csv <samples> <thread count> <mMember> <mInsert> <mDelete>
+```
