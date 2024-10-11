@@ -200,14 +200,14 @@ double RWLockOpsParallel(struct Node *head) {
 }
 
 // Generate a CSV file with performance results for different synchronization methods
-void GenerateResultsCSV(int num_samples, int num_threads) {
+void GenerateResultsCSV(int num_samples, int num_threads, char combined_string[100]) {
     int iterations = num_samples;
     double serial_time, mutex_time, rwlock_time;
 
     struct Node *head = NULL;
     struct Node *list_serial, *list_mutex, *list_rwlock;
 
-    FILE *file = fopen("output.csv", "w");
+    FILE *file = fopen(combined_string, "w");
     if (file == NULL) {
         perror("Error opening file");
         exit(EXIT_FAILURE);
@@ -264,8 +264,12 @@ int main(int argc, char *argv[]) {
         mInsert = atof(argv[5]);
         mDelete = atof(argv[6]);
 
+        char combined_string[100];
+        sprintf(combined_string, "%d_%d_%.3f_%.3f_%.3f.csv", num_samples, num_threads, mMember, mInsert, mDelete);
+        printf("CSV output name: %s\n", combined_string);
+
         srand(time(NULL));
-        GenerateResultsCSV(num_samples, num_threads);
+        GenerateResultsCSV(num_samples, num_threads, combined_string);
     } else {
         thread_count = atoi(argv[1]);
         mMember = atof(argv[2]);
