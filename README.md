@@ -17,7 +17,7 @@ This project implements concurrent operations on a linked list using mutex and r
 To compile the code, navigate to the project directory and run the following command:
 
 ```bash
-gcc -o linked_list main.c linkedList.c -lpthread -lm
+gcc -o executable main.c linkedList.c -lpthread -lm
 ```
 
 ## Commands 

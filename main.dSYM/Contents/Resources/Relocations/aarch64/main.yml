@@ -1,8 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/macbookprom2/Documents/Academics/Semester 7/Parallel and Con Programming/Lab1/main'
-relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _Member, symObjAddr: 0x0, symBinAddr: 0x100003DC4, symSize: 0xA0 }
-  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _Member, symObjAddr: 0x0, symBinAddr: 0x100003DC4, symSize: 0xA0 }
-  - { offsetInCU: 0x85, offset: 0x85, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0xA0, symBinAddr: 0x100003E64, symSize: 0x10C }
-...

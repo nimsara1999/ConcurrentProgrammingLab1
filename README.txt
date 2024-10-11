@@ -14,7 +14,7 @@ Compilation
 
 To compile the code, navigate to the project directory and run the following command:
 
-gcc -o linked_list main.c linkedList.c -lpthread -lm
+gcc -o executable main.c linkedList.c -lpthread -lm
 
 Commands Command1 (Get elapsed time): ./executable <thread count> <mMember> <mInsert> <mDelete>
 
