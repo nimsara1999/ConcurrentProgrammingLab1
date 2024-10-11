@@ -264,6 +264,18 @@ int main(int argc, char *argv[]) {
         mInsert = atof(argv[5]);
         mDelete = atof(argv[6]);
 
+        printf("\n");
+        printf("Test Configurations\n");
+        printf("--------------------------------------------------------------------\n");
+        printf("%-40s - %21d  \n", "Number of threads", num_threads);
+        printf("%-40s - %21d  \n", "n(Initial linked list size)", n);
+        printf("%-40s - %21d  \n", "m(Operations to perform)", m);
+        printf("%-40s - %21.3f  \n", "Percentage of mMember", mMember);
+        printf("%-40s - %21.3f  \n", "Percentage of mInsert", mInsert);
+        printf("%-40s - %21.3f  \n", "Percentage of mDelete", mDelete);
+        printf("--------------------------------------------------------------------\n");
+        printf("\n");printf("\n");
+
         char combined_string[100];
         sprintf(combined_string, "%d_%d_%.3f_%.3f_%.3f.csv", num_samples, num_threads, mMember, mInsert, mDelete);
         printf("CSV output name: %s\n", combined_string);
