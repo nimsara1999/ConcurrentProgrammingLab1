@@ -2,7 +2,7 @@
 
 This project implements concurrent operations on a linked list using mutex and read-write lock synchronization methods. It allows you to test the performance of these synchronization techniques by measuring the elapsed time for various operations.
 
-## Prerequisites
+## Requirements
 
 - GCC or any C compiler
 - `pthread` library for threading
@@ -18,7 +18,7 @@ To compile the code, navigate to the project directory and run the following com
 
 ```bash
 gcc -o linked_list main.c linkedList.c -lpthread -lm
-
+```
 
 ## Commands 
 
